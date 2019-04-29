@@ -3,7 +3,7 @@ filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 " Bundle import FROM HERE ---------------------------------
-call vundle#rc()
+call vundle#begin()
 
 " Format reminder:
 " Bundle 'githubUsername/repoName
@@ -35,6 +35,7 @@ Bundle 'tpope/vim-markdown'
 " Coffee-script syntax support
 Bundle 'kchmck/vim-coffee-script'
 
+call vundle#end()
 " Bundle import ENDS HERE ---------------------------------
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
