@@ -23,8 +23,14 @@ Bundle 'tpope/vim-commentary'
 " Proper JSON filetype detection, and support
 Bundle 'leshill/vim-json'
 
-" Indent support for Javascript
-Bundle 'pangloss/vim-javascript'
+" Syntax highlighting for Javascript
+Plugin 'pangloss/vim-javascript'
+
+" Indent support for JS
+Plugin 'vim-scripts/JavaScript-Indent'
+
+" JSX support for building React apps
+Plugin 'mxw/vim-jsx'
 
 " Indent support for HTML
 Bundle 'indenthtml.vim'
@@ -35,14 +41,44 @@ Bundle 'tpope/vim-markdown'
 " Coffee-script syntax support
 Bundle 'kchmck/vim-coffee-script'
 
+" Adding Emmett to vim
+Plugin 'mattn/emmet-vim'
+
+" Line indentation visualiser
+Plugin 'Yggdroot/indentLine'
+
+" React jsx file support
+Plugin 'chemzqm/vim-jsx-improve'
+
+" Basic multi-language support for rare use of random languages I don't have
+" proper pluging support for
+Plugin 'sheerun/vim-polyglot'
+
+" Tree folder viewer
+Plugin 'scrooloose/nerdtree'
+
+" Smooth scrolling/comfortable motion
+Plugin 'yuttie/comfortable-motion.vim'
+
+" Autocompletion for brackets, braces, and quotes
+Plugin 'Raimondi/delimitMate'
+
 call vundle#end()
+
+call plug#begin('~/.vim/plugged')
+
+" Testing CoC
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
 " Bundle import ENDS HERE ---------------------------------
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab " use spaces instead of tabs.
 set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
 set shiftround " tab / shifting moves to closest tabstop.
@@ -108,6 +144,33 @@ set number
 
 " Set status line display
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
+
+" Adding HTML binding to ejs files
+au BufNewFile,BufRead *.ejs set filetype=html
+
+" Setting indentLine characters colour
+let g:indentLine_setColors = 0
+
+" Apparently I need to set how my backspace is meant to function because for
+" some reason it broke. Not sure which plugin either :/
+set backspace=indent,eol,start  
+
+" Removing detailed help info for methods in YCM after method selected
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Binding ff to open NerdTree
+map ff :NERDTreeToggle<CR>
+
+" Enabling smooth scrolling w/ mouse and setting movement physics
+set mouse=a
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
+
+let delimitMate_expand_cr = 1
+au FileType mail let b:delimitMate_expand_cr = 1
+
+let delimitMate_expand_space = 1
+au FileType tcl let b:delimitMate_expand_space = 1
 
 " Adding our colourscheme
 colorscheme gruvbox
